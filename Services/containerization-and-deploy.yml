@@ -1,0 +1,76 @@
+trigger:
+  - main
+
+variables:
+  - name: imageRepository
+    value: 'PipelineTelemetryRead'
+
+  - name: dockerfilePath
+    value: '$(Build.SourcesDirectory)/src/Services.TelemetryRead/Dockerfile'
+
+  - name: dockerRegistryServiceConnection
+    value: 'RaspberryWeatherAcr'
+
+  - name: azureSubscriptionConnection
+    value: 'AzureResourceManagerRaspberryWeather'
+
+  - name: resourceGroup
+    value: 'Raspberry_Weather_Telemetry'
+
+  - name: containerAppName
+    value: 'telemetry-read-service'
+
+  - name: containerRegistry
+    value: 'raspberryweathercontainerregistry2023.azurecr.io'
+
+  - name: containerImageName
+    value: 'pipelinetelemetryread'
+
+  - name: containerLocation
+    value: 'northeurope'
+    
+  - name: containerEnvironment
+    value: 'telemetry-read-service-enviroment'
+
+  - name: targetPort
+    value: 80
+
+  - name: tag
+    value: 'latest'
+
+stages:
+- stage: BuildAndDeploy
+  displayName: 'Build and Deploy Stage'
+  jobs:
+  - job: BuildAndPush
+    displayName: 'Build and Push Docker Image'
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+    - task: Docker@2
+      displayName: 'Build and Push Image to Container Registry'
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+          $(Build.BuildNumber)
+
+    - task: AzureCLI@2
+      displayName: 'Deploy to Azure Container Instance'
+      inputs:
+        azureSubscription: $(azureSubscriptionConnection)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az containerapp up \
+            --name $(containerAppName) \
+            --resource-group $(resourceGroup) \
+            --location $(containerLocation) \
+            --environment $(containerEnvironment) \
+            --image $(containerRegistry)/$(containerImageName):$(tag) \
+            --target-port $(targetPort) \
+            --ingress external \
+            --query properties.configuration.ingress.fqdn

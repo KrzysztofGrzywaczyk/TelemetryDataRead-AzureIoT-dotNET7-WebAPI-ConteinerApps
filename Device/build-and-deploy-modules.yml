@@ -1,0 +1,54 @@
+trigger:
+  - main
+
+variables: 
+  - name: azureSubscriptionConnection
+    value: 'AzureResourceManagerRaspberryWeatherTelemetry'
+
+  - name: deploymentTemplatePath
+    value: '$(Build.SourcesDirectory)/Device.Modules/deployment.template.json'
+  
+  - name: acrName
+    value: 'RaspberryWeatherTelemetryContainerRegistry2023'
+    
+  - name: workingDirectory
+    value: '$(Build.SourcesDirectory)/Device.Modules/modules'
+
+stages:
+- stage: BuildAndPushToACR
+  displayName: 'Build and Push to ACR Stage'
+  jobs:
+  - job: BuildAndDeploy
+    displayName: 'Build and Deploy'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Build and Push to ACR'
+      inputs:
+        azureSubscription: $(azureSubscriptionConnection)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        workingDirectory: $(workingDirectory)
+        inlineScript: |
+          az acr login --name $(acrName)
+          for module_dir in ./*;
+          do
+              module_name=$(basename "$module_dir" | tr '[:upper:]' '[:lower:]')
+              docker build --rm -f "./$module_dir/Dockerfile.arm32v7" -t "raspberryweathercontainerregistry2023.azurecr.io/$module_name:latest" "./$module_dir"
+              docker push "raspberryweathercontainerregistry2023.azurecr.io/$module_name:latest"
+              sed -i "s#<$module_name>#raspberryweathercontainerregistry2023.azurecr.io/$module_name:latest#" $(deploymentTemplatePath)
+          done
+
+    - task: AzureCLI@2
+      displayName: 'Deploy'
+      inputs:
+        azureSubscription: $(azureSubscriptionConnection)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        workingDirectory: $(workingDirectory)
+        inlineScript: |
+          sed -i "s#<address>#$(ADDRESS)#" $(deploymentTemplatePath)
+          sed -i "s#<password>#$(PASSWORD)#" $(deploymentTemplatePath)
+          sed -i "s#<username>#$(USERNAME)#" $(deploymentTemplatePath)
+          az iot edge set-modules --device-id $(DEVICEID) --hub-name $(HUBNAME) --content $(deploymentTemplatePath)

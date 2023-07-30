@@ -1,0 +1,52 @@
+variables:
+  - name: projectsSrc
+    value: '$(Build.SourcesDirectory)/Device.Modules/modules/**/*.csproj'
+
+  - name: projectsTestSrc
+    value: '$(Build.SourcesDirectory)/Device.Modules/tests/**/*.csproj'
+    
+  - name: testResultSrc
+    value: '$(Build.SourcesDirectory)/Device.Modules/tests/**/TestResults/TestResults_*.xml'
+
+stages:
+- stage: Build
+  displayName: '.NET Build'
+  jobs:
+  - job: "Build"
+    displayName: '.NET Build'
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+    - task: UseDotNet@2
+      displayName: SDK
+      inputs:
+        version: '7.x'
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: '$(projectsSrc)'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '$(projectsSrc)'
+
+    - script: |
+        files=$(ls $(projectsTestSrc))
+        for file in $files
+        do
+          filename=$(basename -- "$file")
+          filename="${filename%.*}"
+          dotnet test $file --logger "trx;LogFileName=TestResults_$filename.xml"
+        done
+      displayName: 'Tests'
+
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      condition: succeededOrFailed()
+      inputs:
+        testRunner: VSTest 
+        testResultsFiles: '$(testResultSrc)'

@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Device.Tests", "Device.Tests", "{6657536C-3121-491A-BA50-E49BC04A03D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Device.Modules", "Device.Modules", "{A66D1F74-568B-48D6-9E9A-FEFA6C31AF21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Co2SensorModule", "Device.Modules\modules\Device.Modules.Co2SensorModule\Co2SensorModule.csproj", "{153B31D8-BF7E-446A-B27D-7BF558DABBE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReceiveAndSendModule", "Device.Modules\modules\Device.Modules.ReceiveAndSendModule\ReceiveAndSendModule.csproj", "{AEE328D0-C0B6-492F-908E-D629AB6D3683}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulationModule", "Device.Modules\modules\Device.Modules.SimulationModule\SimulationModule.csproj", "{3495690F-BD12-4A1C-9FBB-8FA2BC59C369}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureSensorModule", "Device.Modules\modules\Device.Modules.TemperatureSensorModule\TemperatureSensorModule.csproj", "{DD2FD9B0-272E-408E-BE7E-9594BC4398C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device.Co2SensorModuleTests", "Device.Modules\tests\Device.Tests.Co2Module\Device.Co2SensorModuleTests.csproj", "{08D89732-5584-40FE-BA27-F6F75A9EA391}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device.TemperatureSensorModuleTests", "Device.Modules\tests\Device.TemperatureSensorModule.Tests\Device.TemperatureSensorModuleTests.csproj", "{AAF93805-F0A7-4581-BF34-5E12662BB962}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device.ReceiveAndSendModuleTests", "Device.Modules\tests\Device.ReceiveAndSendModule.Tests\Device.ReceiveAndSendModuleTests.csproj", "{B8C818AA-5A86-4E01-AFE7-FAB26DAB1EAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device.SimulationModuleTests", "Device.Modules\tests\Device.SimulationModule.Tests\Device.SimulationModuleTests.csproj", "{ED84E39B-4B2E-4857-9C83-4AC0001645B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{153B31D8-BF7E-446A-B27D-7BF558DABBE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{153B31D8-BF7E-446A-B27D-7BF558DABBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{153B31D8-BF7E-446A-B27D-7BF558DABBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{153B31D8-BF7E-446A-B27D-7BF558DABBE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE328D0-C0B6-492F-908E-D629AB6D3683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE328D0-C0B6-492F-908E-D629AB6D3683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE328D0-C0B6-492F-908E-D629AB6D3683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE328D0-C0B6-492F-908E-D629AB6D3683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3495690F-BD12-4A1C-9FBB-8FA2BC59C369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3495690F-BD12-4A1C-9FBB-8FA2BC59C369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3495690F-BD12-4A1C-9FBB-8FA2BC59C369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3495690F-BD12-4A1C-9FBB-8FA2BC59C369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2FD9B0-272E-408E-BE7E-9594BC4398C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2FD9B0-272E-408E-BE7E-9594BC4398C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2FD9B0-272E-408E-BE7E-9594BC4398C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2FD9B0-272E-408E-BE7E-9594BC4398C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08D89732-5584-40FE-BA27-F6F75A9EA391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D89732-5584-40FE-BA27-F6F75A9EA391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D89732-5584-40FE-BA27-F6F75A9EA391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D89732-5584-40FE-BA27-F6F75A9EA391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF93805-F0A7-4581-BF34-5E12662BB962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF93805-F0A7-4581-BF34-5E12662BB962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF93805-F0A7-4581-BF34-5E12662BB962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF93805-F0A7-4581-BF34-5E12662BB962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C818AA-5A86-4E01-AFE7-FAB26DAB1EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8C818AA-5A86-4E01-AFE7-FAB26DAB1EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8C818AA-5A86-4E01-AFE7-FAB26DAB1EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8C818AA-5A86-4E01-AFE7-FAB26DAB1EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED84E39B-4B2E-4857-9C83-4AC0001645B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED84E39B-4B2E-4857-9C83-4AC0001645B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED84E39B-4B2E-4857-9C83-4AC0001645B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED84E39B-4B2E-4857-9C83-4AC0001645B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{153B31D8-BF7E-446A-B27D-7BF558DABBE4} = {A66D1F74-568B-48D6-9E9A-FEFA6C31AF21}
+		{AEE328D0-C0B6-492F-908E-D629AB6D3683} = {A66D1F74-568B-48D6-9E9A-FEFA6C31AF21}
+		{3495690F-BD12-4A1C-9FBB-8FA2BC59C369} = {A66D1F74-568B-48D6-9E9A-FEFA6C31AF21}
+		{DD2FD9B0-272E-408E-BE7E-9594BC4398C7} = {A66D1F74-568B-48D6-9E9A-FEFA6C31AF21}
+		{08D89732-5584-40FE-BA27-F6F75A9EA391} = {6657536C-3121-491A-BA50-E49BC04A03D1}
+		{AAF93805-F0A7-4581-BF34-5E12662BB962} = {6657536C-3121-491A-BA50-E49BC04A03D1}
+		{B8C818AA-5A86-4E01-AFE7-FAB26DAB1EAC} = {6657536C-3121-491A-BA50-E49BC04A03D1}
+		{ED84E39B-4B2E-4857-9C83-4AC0001645B3} = {6657536C-3121-491A-BA50-E49BC04A03D1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A57AAC2-A063-4D7E-865A-9C0ACFF71900}
+	EndGlobalSection
+EndGlobal

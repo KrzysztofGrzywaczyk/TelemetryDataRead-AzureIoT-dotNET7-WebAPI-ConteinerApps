@@ -1,0 +1,37 @@
+variables:
+  - name: projectPath
+    value: 'src/**/*.csproj'
+  - name: testsPath
+    value: 'test/**/*.csproj'
+
+stages:
+- stage: Build
+  displayName: '.NET Build'
+  jobs:
+  - job: 'Build'
+    displayName: '.NET Build'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UseDotNet@2
+      displayName: SDK
+      inputs:
+        version: '7.x'
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: $(projectPath)
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: $(projectPath)
+
+    - task: DotNetCoreCLI@2
+      displayName: Tests
+      inputs:
+        command: test
+        projects: $(testsPath)
